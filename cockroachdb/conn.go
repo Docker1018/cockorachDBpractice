@@ -10,23 +10,6 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func PrintBalances(db *sql.DB) {
-	// Print out the balances.
-	rows, err := db.Query("SELECT id, balance FROM accounts")
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer rows.Close()
-	fmt.Println("Balances:")
-	for rows.Next() {
-		var id, balance int
-		if err := rows.Scan(&id, &balance); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Printf("%d %d\n", id, balance)
-	}
-}
-
 func transferFunds(tx *sql.Tx, from int, to int, amount int) error {
 	// Read the balance.
 	var fromBalance int
@@ -50,7 +33,9 @@ func transferFunds(tx *sql.Tx, from int, to int, amount int) error {
 	}
 	return nil
 }
-func Connect() (*sql.DB, error)  {
+
+// 連線
+func Connect() (*sql.DB, error) {
 	db, err := sql.Open("postgres", "postgres://docker:@localhost:26257/bank?sslmode=disable")
 	return db, err
 }

@@ -2,17 +2,19 @@ package controller
 
 import (
 	"cockroach/cockroachdb"
+	"cockroach/model"
 	"log"
 )
-func SelectData () {
+
+func SelectData() []*model.Member {
 	db, err := cockroachdb.Connect()
 	if err != nil {
 		log.Fatal("error connecting to the database: ", err)
 	}
 	defer db.Close()
 
-	cockroachdb.PrintBalances(db);
+	return cockroachdb.PrintBalances(db)
 }
-func InsertData () {}
-func UpdateData () {}
-func DeleteData () {}
+func InsertData() {}
+func UpdateData() {}
+func DeleteData() {}

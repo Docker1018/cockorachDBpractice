@@ -3,13 +3,11 @@ package main
 import (	
 	"cockroach/controller"
 	"github.com/gin-gonic/gin"
-	"net/http"
+	// "net/http"
 )
 
 func main() {
 	controller.SelectData()
-	// db.Action()
-	// fmt.Println("?");
 	router := gin.Default()
 
 	router.GET("/test/:name", getTest)
@@ -18,6 +16,6 @@ func main() {
 }
 
 func getTest(c *gin.Context) {
-	name := c.Param("name")
-		c.String(http.StatusOK, "Hello %s", name)
+	data := controller.SelectData()
+	c.JSON(200, data)
 }
