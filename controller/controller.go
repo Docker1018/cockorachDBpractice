@@ -15,6 +15,10 @@ func SelectData() []*model.Member {
 
 	return cockroachdb.PrintBalances(db)
 }
-func InsertData() {}
+func InsertData(d *model.Member) *model.Member {
+	db, err ;= cockroachdb.Connect()
+	
+	return d
+}
 func UpdateData() {}
 func DeleteData() {}

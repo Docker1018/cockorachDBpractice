@@ -26,3 +26,14 @@ func PrintBalances(db *sql.DB) []*model.Member {
 	}
 	return vals
 }
+
+func insert(db *sql.DB,) error{
+	// Insert two rows into the "accounts" table.
+
+	stmt, err := db.Prepare("INSERT INTO member (account, password, name) VALUES ($1, $2, $3, $4)")
+	if _, err := db.Exec(
+	    "INSERT INTO member (id, balance) VALUES (3, 1000), (2, 250)") 
+			err != nil {
+	    return err
+	}
+}
